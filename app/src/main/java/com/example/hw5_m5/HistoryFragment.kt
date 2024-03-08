@@ -5,12 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 
 import com.example.hw5_m5.databinding.FragmentHistoryBinding
+import com.example.hw5_m5.room.LoveDao
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
-
+    @Inject
+    lateinit var dao: LoveDao
+    private val viewModel: LoveViewModel by viewModels()
     private lateinit var binding: FragmentHistoryBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +31,16 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = App.appDatabase.getDao().getAll()
+        viewModel.getGetDao().observe(viewLifecycleOwner, Observer {loveModelList ->
+            val list = mutableListOf<LoveModel>()
+            loveModelList?.let { list.add(it) }
 
-        list.forEach {
-            binding.tvListHistory.text = list.joinToString(separator = "", prefix = "", postfix = "")
-        }
+            binding.tvListHistory.text =list.joinToString(
+                separator = "\n",
+                transform = { it.toString() },
+                prefix = "",
+                postfix = ""
+            )
+        })
     }
 }

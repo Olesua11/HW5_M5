@@ -17,4 +17,5 @@ class App : Application() {
         appDatabase = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "love-file")
             .allowMainThreadQueries().build()
     }
+
 }

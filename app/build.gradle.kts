@@ -73,5 +73,12 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+    implementation ("me.relex:circleindicator:2.1.6")
+    implementation ("me.relex:circleindicator:2.1.6")
+
+    val lottieVersion = "3.4.0"
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
+
+
 }
 

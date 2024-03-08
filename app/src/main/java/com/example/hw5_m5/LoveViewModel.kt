@@ -11,4 +11,8 @@ class LoveViewModel @Inject constructor(private val repository: Repository) : Vi
     fun getLiveLoveData(firstName: String, secondName: String): LiveData<LoveModel> {
         return repository.getData(firstName, secondName)
     }
+
+    fun getGetDao(): LiveData<LoveModel>{
+        return  repository.getDao()
+    }
 }

@@ -34,7 +34,6 @@ class MainFragment : Fragment() {
                 viewModel.getLiveLoveData(etFirstName.text.toString(), etSecondName.text.toString())
                     .observe(viewLifecycleOwner, Observer {
                         tvResult.text = it.toString()
-                        App.appDatabase.getDao().insert(it)
                     })
             }
             btnHistory.setOnClickListener {
